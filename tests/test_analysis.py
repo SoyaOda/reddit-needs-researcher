@@ -8,19 +8,19 @@ from reddit_needs_researcher.models import SourceItem
 
 
 class AnalysisTests(unittest.TestCase):
-    def test_detects_multiple_need_signals(self) -> None:
-        text = "I wish there was an alternative to this app. It is too expensive and frustrating."
+    def test_detects_multiple_community_support_signals(self) -> None:
+        text = "New here and confused about the rules. Where can I find the FAQ or weekly thread?"
         signals = detect_signals(text)
-        self.assertIn("explicit_wish", signals)
-        self.assertIn("switching", signals)
-        self.assertIn("cost", signals)
-        self.assertIn("friction", signals)
+        self.assertIn("onboarding_friction", signals)
+        self.assertIn("rule_confusion", signals)
+        self.assertIn("repeated_question", signals)
+        self.assertIn("faq_gap", signals)
 
     def test_scores_signal_item_above_neutral_item(self) -> None:
         now = datetime.now(timezone.utc).timestamp()
         signal_item = make_item(
             fullname="t3_signal",
-            body="Does anyone know a better app? I am frustrated with manual tracking.",
+            body="Does anyone know where the wiki is? I am new here and confused about the rules.",
             created_utc=now,
         )
         neutral_item = make_item(
@@ -54,4 +54,3 @@ def make_item(*, fullname: str, body: str, created_utc: float) -> SourceItem:
 
 if __name__ == "__main__":
     unittest.main()
-

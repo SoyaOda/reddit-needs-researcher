@@ -4,9 +4,9 @@
   "required": [
     "topic",
     "executive_summary",
-    "segments",
-    "pain_clusters",
-    "opportunities",
+    "community_segments",
+    "faq_gaps",
+    "moderator_review_items",
     "next_queries",
     "uncertainties"
   ],
@@ -17,7 +17,7 @@
     "executive_summary": {
       "type": "string"
     },
-    "segments": {
+    "community_segments": {
       "type": "array",
       "items": {
         "type": "object",
@@ -49,14 +49,14 @@
         }
       }
     },
-    "pain_clusters": {
+    "faq_gaps": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [
           "label",
-          "problem",
+          "gap",
           "severity",
           "frequency_signal",
           "evidence_ids"
@@ -65,7 +65,7 @@
           "label": {
             "type": "string"
           },
-          "problem": {
+          "gap": {
             "type": "string"
           },
           "severity": {
@@ -88,16 +88,16 @@
         }
       }
     },
-    "opportunities": {
+    "moderator_review_items": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [
           "title",
-          "user_need",
-          "solution_hypothesis",
-          "why_now",
+          "observed_pattern",
+          "suggested_action",
+          "review_reason",
           "confidence",
           "evidence_ids"
         ],
@@ -105,13 +105,13 @@
           "title": {
             "type": "string"
           },
-          "user_need": {
+          "observed_pattern": {
             "type": "string"
           },
-          "solution_hypothesis": {
+          "suggested_action": {
             "type": "string"
           },
-          "why_now": {
+          "review_reason": {
             "type": "string"
           },
           "confidence": {
@@ -159,4 +159,3 @@
     }
   }
 }
-

@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Reddit Needs Researcher</title>
-    <meta name="description" content="A read-only, low-volume Reddit Data API prototype for product-discovery analysis.">
+    <title>Community FAQ Insight Tool</title>
+    <meta name="description" content="A read-only, low-volume Reddit Data API prototype for community FAQ and moderator insight reports.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="hero">
       <nav class="topbar" aria-label="Primary">
-        <a class="brand" href="./">Reddit Needs Researcher</a>
+        <a class="brand" href="./">Community FAQ Insight Tool</a>
         <div class="navlinks">
           <a href="#safeguards">Safeguards</a>
           <a href="#api-use">API Use</a>
@@ -20,10 +20,11 @@
       <section class="hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">Read-only Data API prototype</p>
-          <h1>External local tool for finding user pain points in public Reddit discussions</h1>
+          <h1>External local tool for improving community FAQs and moderator guidance</h1>
           <p class="lead">
             This prototype uses approved OAuth access, small topic-scoped queries, and local analysis to
-            identify recurring product-discovery signals. It does not post, vote, message, scrape, or train
+            identify recurring questions, rule confusion, and onboarding friction in public community discussions.
+            It does not post, vote, message, scrape, moderate automatically, or train
             a model on Reddit data.
           </p>
           <div class="hero-actions">
@@ -31,22 +32,22 @@
             <a class="button secondary" href="source.html">View source manifest</a>
           </div>
         </div>
-        <div class="product-panel" aria-label="Product workflow summary">
+        <div class="preview-panel" aria-label="Community workflow summary">
           <div class="panel-header">
             <span class="status-dot"></span>
             <span>local run preview</span>
           </div>
           <pre><code>$ rnr collect --dry-run
-planned_requests: 135
+planned_requests: 90
 mode: read_only
 store_author: false
 
 $ rnr analyze-local
 signals:
-  explicit_wish
-  friction
-  switching
-  cost</code></pre>
+  repeated_question
+  rule_confusion
+  onboarding_friction
+  faq_gap</code></pre>
         </div>
       </section>
     </header>
@@ -55,12 +56,12 @@ signals:
       <section class="section overview">
         <div>
           <p class="section-kicker">Purpose</p>
-          <h2>Bounded product-discovery research, not on-platform automation</h2>
+          <h2>Bounded community-support reporting, not on-platform automation</h2>
         </div>
           <p>
-            The app is a local CLI and report generator. It helps a developer inspect public discussions for
-            repeated user needs, friction, workarounds, and tool-switching signals. The output is an internal
-            discovery report with evidence IDs and uncertainty notes.
+            The app is a local CLI and report generator for community operators and moderators. It helps review
+            public discussions for repeated questions, confusing rules, recurring support topics, and gaps in
+            wiki or FAQ guidance. The output is a private operational report with evidence IDs and uncertainty notes.
           </p>
           <p>
             Public source is available at
@@ -71,10 +72,10 @@ signals:
       <section class="visual-section" aria-labelledby="flow-title">
         <div>
           <p class="section-kicker">Architecture</p>
-          <h2 id="flow-title">Controlled collection before agent analysis</h2>
+          <h2 id="flow-title">Controlled collection before local summarization</h2>
           <p>
-            The agent never gets unrestricted access to Reddit. A dedicated collector controls OAuth,
-            rate limits, storage, and the exact evidence snapshot used for analysis.
+            No agent gets unrestricted access to Reddit. A dedicated collector controls OAuth, rate limits,
+            storage, and the exact evidence snapshot used for local summarization.
           </p>
         </div>
         <img class="flow-asset" src="assets/data-flow.svg" alt="Topic config flows into Reddit API collector, SQLite evidence store, local analyzer, JSONL export, and structured report.">
@@ -83,7 +84,7 @@ signals:
       <section class="cards" id="safeguards">
         <article>
           <h3>Read-only behavior</h3>
-          <p>No posting, commenting, voting, messaging, moderation actions, or account automation.</p>
+          <p>No posting, commenting, voting, messaging, automated moderation actions, or account automation.</p>
         </article>
         <article>
           <h3>No scraping fallback</h3>
@@ -95,7 +96,7 @@ signals:
         </article>
         <article>
           <h3>No model training</h3>
-          <p>Small JSONL evidence snapshots may be summarized by an agent, but not used to train a model.</p>
+          <p>Small JSONL evidence snapshots may be summarized locally, but are not used to train a model.</p>
         </article>
       </section>
 
@@ -116,15 +117,15 @@ signals:
             </tr>
             <tr>
               <th scope="row">Initial subreddits</th>
-              <td><code>loseit</code>, <code>CICO</code>, <code>MealPrepSunday</code>.</td>
+              <td><code>test</code> and <code>learnprogramming</code> for technical validation; live use requires moderator approval.</td>
             </tr>
             <tr>
               <th scope="row">Default limits</th>
-              <td>8 posts per query and 10 comments per post, estimated at 135 requests for the example topic.</td>
+              <td>8 posts per query and 10 comments per post, estimated at 90 requests for the example topic.</td>
             </tr>
             <tr>
               <th scope="row">Data storage</th>
-              <td>Local SQLite evidence store; generated reports and datasets are local artifacts, not public exports.</td>
+              <td>Local SQLite evidence store; generated reports are private operational artifacts, not public data exports.</td>
             </tr>
           </tbody>
         </table>
@@ -137,8 +138,9 @@ signals:
         </div>
         <p>
           Devvit is designed for apps that run on Reddit and provide on-platform experiences, event triggers,
-          and UI. This prototype needs to run off-platform as a local CLI, write a local SQLite database,
-          export JSONL, and invoke local Codex or Claude Code workflows for structured analysis.
+          and UI. This prototype is an external audit and reporting utility: it runs locally, creates a reviewable
+          SQLite evidence log, verifies deletion and retention behavior, and produces a private report that moderators
+          can use to decide whether to update community wiki, FAQ, or rule guidance.
         </p>
       </section>
 
@@ -156,7 +158,7 @@ signals:
     </main>
 
     <footer>
-      <span>Reddit Needs Researcher prototype</span>
+      <span>Community FAQ Insight Tool prototype</span>
       <span>Read-only Data API access request support page</span>
     </footer>
   </body>

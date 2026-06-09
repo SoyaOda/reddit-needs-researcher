@@ -1,13 +1,14 @@
 # reddit-needs-researcher
 
-Reddit の投稿・コメントから「ユーザーの悩み」「未充足ニーズ」「次に掘るべき探索クエリ」を抽出するための技術検証プロジェクトです。
+Reddit の公開投稿・コメントから、コミュニティ内で繰り返される質問、ルールの混乱、FAQ不足、moderator が確認すべき運営改善候補を抽出するための技術検証プロジェクトです。
 
-この初期版は依存関係を追加せず、Python 標準ライブラリだけで動くようにしています。Reddit 取得は OAuth/Data API 前提、分析はローカルのヒューリスティックと Codex/Claude CLI のどちらでも回せる構成です。
+この初期版は依存関係を追加せず、Python 標準ライブラリだけで動くようにしています。Reddit 取得は OAuth/Data API 前提、分析はローカルのヒューリスティックを主にし、必要に応じて境界付き JSONL snapshot を Codex/Claude CLI で要約できる構成です。
 
 ## 現時点の技術判断
 
 - Reddit 側は 2026年時点で OAuth と承認済み Data API アクセスが前提です。公式 Help は 100 QPM/OAuth client id、`X-Ratelimit-*` ヘッダー監視、未認証トラフィックのブロックを明記しています。
-- agent に Reddit を直接探索させるのではなく、収集器が API/rate limit/保存形式を制御し、agent は JSONL snapshot を読むだけにします。
+- agent に Reddit を直接探索させるのではなく、収集器が API/rate limit/保存形式を制御し、agent は境界付き JSONL snapshot を読むだけにします。
+- 初期運用は非商用の community FAQ / moderator insight 用途に限定します。商用の顧客調査、広告、プロファイリング、AI/ML training、データ再配布には使いません。
 - Codex は `codex exec --output-schema`、Claude Code は `claude -p --json-schema` で構造化出力に寄せます。
 - PRAW/Async PRAW は有力ですが、初期版では依存追加確認を避けるため直接 HTTP 実装にしています。必要なら後で差し替え可能です。
 
@@ -51,12 +52,12 @@ PYTHONPATH=src python3 -m reddit_needs_researcher.cli collect \
   --db data/reddit.sqlite
 ```
 
-ローカルで悩みシグナルを抽出します。
+ローカルでコミュニティ運営シグナルを抽出します。
 
 ```bash
 PYTHONPATH=src python3 -m reddit_needs_researcher.cli analyze-local \
   --db data/reddit.sqlite \
-  --topic "habit and nutrition coaching" \
+  --topic "community FAQ and rule guidance improvement" \
   --output reports/local-report.md \
   --json-output reports/local-report.json
 ```
@@ -66,7 +67,7 @@ agent に渡す JSONL を作ります。
 ```bash
 PYTHONPATH=src python3 -m reddit_needs_researcher.cli export-jsonl \
   --db data/reddit.sqlite \
-  --topic "habit and nutrition coaching" \
+  --topic "community FAQ and rule guidance improvement" \
   --output data/evidence.jsonl
 ```
 

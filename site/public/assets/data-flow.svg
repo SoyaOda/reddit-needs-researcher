@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1040" height="640" viewBox="0 0 1040 640" role="img" aria-labelledby="title desc">
-  <title id="title">Reddit Needs Researcher data flow</title>
-  <desc id="desc">A read-only workflow from topic configuration to Reddit API collector, local SQLite evidence store, local analyzer, JSONL export, and structured report.</desc>
+  <title id="title">Community FAQ Insight Tool data flow</title>
+  <desc id="desc">A read-only workflow from topic configuration to Reddit API collector, local SQLite evidence store, local analyzer, JSONL export, and private moderator report.</desc>
   <defs>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#153d33" flood-opacity="0.16"/>
@@ -22,10 +22,10 @@
     <text x="794" y="154" font-family="Inter, Arial, sans-serif" font-size="17" fill="#59655e">local evidence only</text>
     <rect x="218" y="372" width="250" height="112" rx="12" fill="#ffffff" stroke="#d8dfd8"/>
     <text x="246" y="418" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#17201a">Local analyzer</text>
-    <text x="246" y="452" font-family="Inter, Arial, sans-serif" font-size="17" fill="#59655e">pain signals + scores</text>
+    <text x="246" y="452" font-family="Inter, Arial, sans-serif" font-size="17" fill="#59655e">FAQ gaps + scores</text>
     <rect x="584" y="372" width="250" height="112" rx="12" fill="#ffffff" stroke="#d8dfd8"/>
-    <text x="612" y="418" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#17201a">Agent report</text>
-    <text x="612" y="452" font-family="Inter, Arial, sans-serif" font-size="17" fill="#59655e">schema-bound summary</text>
+    <text x="612" y="418" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#17201a">Private report</text>
+    <text x="612" y="452" font-family="Inter, Arial, sans-serif" font-size="17" fill="#59655e">moderator review items</text>
   </g>
   <path d="M 274 130 H 397" fill="none" stroke="#27614f" stroke-width="5" marker-end="url(#arrow)"/>
   <path d="M 660 130 H 753" fill="none" stroke="#27614f" stroke-width="5" marker-end="url(#arrow)"/>
@@ -37,4 +37,3 @@
     <text x="82" y="575" font-family="Inter, Arial, sans-serif" font-size="18" fill="#153d33">No posting · No voting · No private data · No browser scraping · No model training</text>
   </g>
 </svg>
-

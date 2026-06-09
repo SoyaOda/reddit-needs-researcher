@@ -13,49 +13,46 @@ MAX_EXCERPT_CHARS = 220
 RECENCY_HALF_LIFE_DAYS = 180.0
 
 SIGNAL_PATTERNS: dict[str, tuple[str, ...]] = {
-    "explicit_wish": (
-        r"\bi wish\b",
-        r"\bwould love\b",
-        r"\bif only\b",
-        r"\bi need\b",
-    ),
-    "friction": (
-        r"\bfrustrat(?:ed|ing|ion)\b",
-        r"\bannoy(?:ed|ing|ance)\b",
-        r"\bhate\b",
-        r"\btoo much work\b",
-        r"\bhard to\b",
-        r"\bstruggl(?:e|ing)\b",
-        r"\bcan't\b",
-        r"\bcannot\b",
-    ),
-    "seeking_solution": (
+    "repeated_question": (
         r"\bdoes anyone know\b",
-        r"\bany recommendations\b",
-        r"\brecommend(?:ation)?\b",
-        r"\blooking for\b",
         r"\bhow do i\b",
+        r"\bhow can i\b",
+        r"\bwhere can i find\b",
+        r"\bwhere do i\b",
+        r"\bwhat should i\b",
     ),
-    "switching": (
-        r"\balternative to\b",
-        r"\breplace\b",
-        r"\bswitch(?:ed|ing)?\b",
-        r"\bbetter than\b",
+    "rule_confusion": (
+        r"\brule(?:s)?\b.*\bconfus(?:ed|ing|ion)\b",
+        r"\bconfus(?:ed|ing|ion)\b.*\brule(?:s)?\b",
+        r"\ballowed\b",
+        r"\bnot allowed\b",
+        r"\bcan i post\b",
+        r"\bwhere should i post\b",
     ),
-    "cost": (
-        r"\btoo expensive\b",
-        r"\bpaywall\b",
-        r"\bsubscription\b",
-        r"\bprice\b",
-        r"\bfree version\b",
+    "onboarding_friction": (
+        r"\bnew here\b",
+        r"\bfirst time\b",
+        r"\bbeginner\b",
+        r"\bgetting started\b",
+        r"\bstart here\b",
+        r"\bcan't find\b",
+        r"\bcannot find\b",
     ),
-    "trust_quality": (
-        r"\binaccurate\b",
-        r"\bunreliable\b",
-        r"\bbug(?:gy|s)?\b",
-        r"\bprivacy\b",
-        r"\bads\b",
-        r"\bsync\b",
+    "faq_gap": (
+        r"\bfaq\b",
+        r"\bwiki\b",
+        r"\bpinned post\b",
+        r"\bmegathread\b",
+        r"\bweekly thread\b",
+        r"\bsidebar\b",
+    ),
+    "moderator_review": (
+        r"\bmod(?:erator)?s?\b",
+        r"\bremoved\b",
+        r"\bautomod\b",
+        r"\bflair\b",
+        r"\bappeal\b",
+        r"\bclarif(?:y|ication)\b",
     ),
 }
 
@@ -176,4 +173,3 @@ def infer_topic(items: list[SourceItem]) -> str:
         if item.topic:
             return item.topic
     return "unknown"
-

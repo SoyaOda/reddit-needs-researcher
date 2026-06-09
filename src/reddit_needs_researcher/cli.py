@@ -81,7 +81,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="reddit-needs-researcher",
-        description="Collect Reddit evidence and analyze user pain points.",
+        description="Collect Reddit evidence and analyze community FAQ and moderator insight signals.",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -130,4 +130,3 @@ def parse_provider(value: str) -> AgentProvider:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
