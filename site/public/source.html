@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Source Manifest - Reddit Needs Researcher</title>
+    <meta name="description" content="Source manifest for the Reddit Needs Researcher prototype.">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="subpage">
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand" href="/">Reddit Needs Researcher</a>
+        <div class="navlinks">
+          <a href="/">Overview</a>
+          <a href="/api-access-plan.json">API plan JSON</a>
+        </div>
+      </nav>
+      <div class="subpage-title">
+        <p class="eyebrow">Source manifest</p>
+        <h1>Readable project structure for API access review</h1>
+        <p>
+          The prototype is intentionally small and dependency-free. It is implemented in Python standard
+          library modules plus a static documentation site.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section table-section">
+        <div>
+          <p class="section-kicker">Runtime</p>
+          <h2>Core modules</h2>
+        </div>
+        <table>
+          <tbody>
+            <tr>
+              <th scope="row"><code>reddit_client.py</code></th>
+              <td>OAuth token acquisition, Reddit API requests, User-Agent headers, and rate-limit header handling.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>collector.py</code></th>
+              <td>Topic-configured subreddit search and public comment retrieval with small limits.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>store.py</code></th>
+              <td>Local SQLite evidence storage, dedupe, and JSONL export.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>analysis.py</code></th>
+              <td>Local signal scoring for explicit wishes, friction, switching, cost, and quality issues.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>agent_runner.py</code></th>
+              <td>Optional wrapper for Codex or Claude Code structured summaries from a bounded JSONL snapshot.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>cli.py</code></th>
+              <td>Command-line entry points for config validation, collection, local analysis, JSONL export, and agent report generation.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <div>
+          <p class="section-kicker">Commands</p>
+          <h2>Verification surface</h2>
+        </div>
+        <div class="code-card">
+          <pre><code>python3 -m compileall src tests scripts
+PYTHONPATH=src python3 -m unittest discover -s tests
+PYTHONPATH=src python3 -m reddit_needs_researcher.cli collect \
+  --config configs/example.topic.json \
+  --db data/reddit.sqlite \
+  --dry-run</code></pre>
+        </div>
+      </section>
+
+      <section class="cards compact">
+        <article>
+          <h3>No secret files</h3>
+          <p>The app does not read <code>.env</code>. API credentials are read only from process environment variables at runtime.</p>
+        </article>
+        <article>
+          <h3>No fallback scraping</h3>
+          <p>If OAuth credentials are absent or API access fails, collection stops with an explicit error.</p>
+        </article>
+        <article>
+          <h3>Review artifact</h3>
+          <p>The machine-readable access plan is available at <a href="/api-access-plan.json">/api-access-plan.json</a>.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <span><a href="/">Overview</a></span>
+      <span>Source manifest for review</span>
+    </footer>
+  </body>
+</html>
+

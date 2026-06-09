@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reddit Needs Researcher</title>
+    <meta name="description" content="A read-only, low-volume Reddit Data API prototype for product-discovery analysis.">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand" href="/">Reddit Needs Researcher</a>
+        <div class="navlinks">
+          <a href="#safeguards">Safeguards</a>
+          <a href="#api-use">API Use</a>
+          <a href="/source.html">Source Manifest</a>
+        </div>
+      </nav>
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Read-only Data API prototype</p>
+          <h1>External local tool for finding user pain points in public Reddit discussions</h1>
+          <p class="lead">
+            This prototype uses approved OAuth access, small topic-scoped queries, and local analysis to
+            identify recurring product-discovery signals. It does not post, vote, message, scrape, or train
+            a model on Reddit data.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#api-use">Review API plan</a>
+            <a class="button secondary" href="/source.html">View source manifest</a>
+          </div>
+        </div>
+        <div class="product-panel" aria-label="Product workflow summary">
+          <div class="panel-header">
+            <span class="status-dot"></span>
+            <span>local run preview</span>
+          </div>
+          <pre><code>$ rnr collect --dry-run
+planned_requests: 135
+mode: read_only
+store_author: false
+
+$ rnr analyze-local
+signals:
+  explicit_wish
+  friction
+  switching
+  cost</code></pre>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section overview">
+        <div>
+          <p class="section-kicker">Purpose</p>
+          <h2>Bounded product-discovery research, not on-platform automation</h2>
+        </div>
+        <p>
+          The app is a local CLI and report generator. It helps a developer inspect public discussions for
+          repeated user needs, friction, workarounds, and tool-switching signals. The output is an internal
+          discovery report with evidence IDs and uncertainty notes.
+        </p>
+      </section>
+
+      <section class="visual-section" aria-labelledby="flow-title">
+        <div>
+          <p class="section-kicker">Architecture</p>
+          <h2 id="flow-title">Controlled collection before agent analysis</h2>
+          <p>
+            The agent never gets unrestricted access to Reddit. A dedicated collector controls OAuth,
+            rate limits, storage, and the exact evidence snapshot used for analysis.
+          </p>
+        </div>
+        <img class="flow-asset" src="/assets/data-flow.svg" alt="Topic config flows into Reddit API collector, SQLite evidence store, local analyzer, JSONL export, and structured report.">
+      </section>
+
+      <section class="cards" id="safeguards">
+        <article>
+          <h3>Read-only behavior</h3>
+          <p>No posting, commenting, voting, messaging, moderation actions, or account automation.</p>
+        </article>
+        <article>
+          <h3>No scraping fallback</h3>
+          <p>OAuth Data API access only. Unauthenticated JSON endpoints and browser scraping are excluded.</p>
+        </article>
+        <article>
+          <h3>No author storage by default</h3>
+          <p>Evidence is normalized locally and author names are not retained unless explicitly configured.</p>
+        </article>
+        <article>
+          <h3>No model training</h3>
+          <p>Small JSONL evidence snapshots may be summarized by an agent, but not used to train a model.</p>
+        </article>
+      </section>
+
+      <section class="section table-section" id="api-use">
+        <div>
+          <p class="section-kicker">Reddit API use</p>
+          <h2>Initial access plan</h2>
+        </div>
+        <table>
+          <tbody>
+            <tr>
+              <th scope="row">Authentication</th>
+              <td>OAuth client credentials with a unique descriptive User-Agent.</td>
+            </tr>
+            <tr>
+              <th scope="row">Rate limits</th>
+              <td>Monitor <code>X-Ratelimit-Used</code>, <code>X-Ratelimit-Remaining</code>, and <code>X-Ratelimit-Reset</code>; default spacing is at least 1 second between requests.</td>
+            </tr>
+            <tr>
+              <th scope="row">Initial subreddits</th>
+              <td><code>loseit</code>, <code>CICO</code>, <code>MealPrepSunday</code>.</td>
+            </tr>
+            <tr>
+              <th scope="row">Default limits</th>
+              <td>8 posts per query and 10 comments per post, estimated at 135 requests for the example topic.</td>
+            </tr>
+            <tr>
+              <th scope="row">Data storage</th>
+              <td>Local SQLite evidence store; generated reports and datasets are local artifacts, not public exports.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <div>
+          <p class="section-kicker">Why not Devvit</p>
+          <h2>External local analysis pipeline</h2>
+        </div>
+        <p>
+          Devvit is designed for apps that run on Reddit and provide on-platform experiences, event triggers,
+          and UI. This prototype needs to run off-platform as a local CLI, write a local SQLite database,
+          export JSONL, and invoke local Codex or Claude Code workflows for structured analysis.
+        </p>
+      </section>
+
+      <section class="cards compact">
+        <article>
+          <h3>Responsible access</h3>
+          <p>Access request details, operator account, and contact email are supplied directly through Reddit's request form.</p>
+        </article>
+        <article>
+          <h3>Source transparency</h3>
+          <p>The current project source tree and command surface are summarized in the source manifest.</p>
+          <a href="/source.html">Open source manifest</a>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <span>Reddit Needs Researcher prototype</span>
+      <span>Read-only Data API access request support page</span>
+    </footer>
+  </body>
+</html>
+

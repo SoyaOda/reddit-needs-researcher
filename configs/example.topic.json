@@ -1,0 +1,27 @@
+{
+  "topic": "habit and nutrition coaching",
+  "subreddits": [
+    "loseit",
+    "CICO",
+    "MealPrepSunday"
+  ],
+  "queries": [
+    "\"I wish\" app",
+    "\"does anyone know\" tracking",
+    "\"frustrated\" calories",
+    "\"hard to\" meal plan",
+    "\"alternative to\" MyFitnessPal"
+  ],
+  "search_sorts": [
+    "relevance"
+  ],
+  "time_filters": [
+    "month"
+  ],
+  "post_limit_per_query": 8,
+  "comment_limit_per_post": 10,
+  "comment_sort": "confidence",
+  "comment_depth": 4,
+  "min_seconds_between_requests": 1.0,
+  "store_author": false
+}
