@@ -1,0 +1,40 @@
+{
+  "app_name": "reddit-needs-researcher",
+  "purpose": "Read-only product-discovery analysis of public Reddit discussions.",
+  "platform_type": "External local CLI and report generator",
+  "reddit_actions": {
+    "reads_public_posts": true,
+    "reads_public_comments": true,
+    "posts_content": false,
+    "votes": false,
+    "sends_messages": false,
+    "moderates": false,
+    "uses_browser_scraping": false
+  },
+  "initial_subreddits": [
+    "loseit",
+    "CICO",
+    "MealPrepSunday"
+  ],
+  "default_limits": {
+    "posts_per_query": 8,
+    "comments_per_post": 10,
+    "estimated_requests_for_example_config": 135,
+    "minimum_seconds_between_requests": 1.0
+  },
+  "data_handling": {
+    "stores_author_by_default": false,
+    "local_sqlite_only": true,
+    "exports_jsonl_for_bounded_analysis": true,
+    "model_training": false
+  },
+  "api_controls": [
+    "OAuth client credentials",
+    "Unique descriptive User-Agent",
+    "X-Ratelimit-Used monitoring",
+    "X-Ratelimit-Remaining monitoring",
+    "X-Ratelimit-Reset monitoring",
+    "Explicit error on missing credentials"
+  ]
+}
+
