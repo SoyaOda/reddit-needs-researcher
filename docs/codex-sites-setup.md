@@ -23,6 +23,15 @@ Checked on 2026-06-09.
 The current environment still cannot expose Sites hosting tools until the Sites connector
 becomes accessible to the account/workspace.
 
+## GitHub Pages Fallback
+
+Codex Sites was unavailable, so the review site was published with GitHub Pages.
+
+- Public site: https://soyaoda.github.io/reddit-needs-researcher/
+- Public repository: https://github.com/SoyaOda/reddit-needs-researcher
+- Pages source: `gh-pages` branch, root path `/`
+- Main source branch: `main`
+
 Expected plugin/app mapping:
 
 ```text

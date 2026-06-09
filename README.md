@@ -127,6 +127,9 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 
 `site/` は Reddit Data API access request の `source code or platform URL` に使うための公開説明ページです。個人情報は公開せず、フォーム側に入力する前提にしています。
 
+公開URL: https://soyaoda.github.io/reddit-needs-researcher/
+公開リポジトリ: https://github.com/SoyaOda/reddit-needs-researcher
+
 ```bash
 cd site
 npm run build
